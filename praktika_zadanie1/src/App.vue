@@ -2,6 +2,7 @@
     <div id="app">
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         <h1> Список проектов</h1>
         <ProjectList 
                      v-bind:spisok="spisok" 
@@ -44,6 +45,12 @@ export default {
 
 }
 </script>
+=======
+        <router-view></router-view>
+    </div>
+</template>
+
+>>>>>>> Stashed changes
 =======
         <router-view></router-view>
     </div>
