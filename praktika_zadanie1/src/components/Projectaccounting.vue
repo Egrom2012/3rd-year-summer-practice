@@ -1,6 +1,7 @@
 <template>
   <div>
     <form @submit.prevent="onsubmit">
+<<<<<<< Updated upstream
       <input type="text" class="textcg" v-model="title" />
       <button type="submit" class="butcg">Создать новую задачу</button>
     </form>
@@ -24,11 +25,32 @@
           </button>
         </li>
       </ul>
+=======
+        <input type="text" class="textcg" v-model="title" />
+        <button type="submit" class="butcg">Создать новый проект</button>
+    </form>
+    <div>
+        <ul>
+            <li v-for="(i,f) in spisok" v-bind:class="{done:i.completed}">
+
+                <span>
+                    <input type="checkbox"
+                           v-on:change="i.completed = !i.completed" />
+                    <input type="text" v-if="i.isEditing" @keyup.enter="$emit('edit-Project',i.title)" v-model=i.title>
+                    <span v-else> {{f+1}} {{i.title}}</span>
+                </span>
+                <button class="ra" v-on:click="$emit ('change-Editing',i.title)">Изменить</button>
+                <button class="rm" v-on:click="$emit ('remove-project',i.id)">&times;</button>
+
+            </li>
+        </ul>
+>>>>>>> Stashed changes
     </div>
   </div>
 </template>
 
 <script>
+<<<<<<< Updated upstream
 export default {
   props: ["spisok"],
   f: Number,
@@ -36,6 +58,12 @@ export default {
     title: "",
     editedId: null,
   }),
+=======
+    export default
+        {
+            props: ['spisok'],
+            f: Number,
+>>>>>>> Stashed changes
 
   methods: {
     onsubmit() {
@@ -68,6 +96,7 @@ li {
   margin-bottom: 1rem;
 }
 
+<<<<<<< Updated upstream
 .rm {
   background: red;
   color: #ffffff;
@@ -81,6 +110,11 @@ input {
 .done {
   text-decoration: line-through;
 }
+=======
+    .done {
+        text-decoration: line-through;
+    }
+>>>>>>> Stashed changes
 
 form {
   display: flex;

@@ -2,8 +2,13 @@
   "ExpandedNodes": [
     "",
     "\\src",
-    "\\src\\components"
+    "\\src\\components",
+    "\\src\\views"
   ],
+<<<<<<< Updated upstream
   "SelectedNode": "\\src\\components\\Projectaccounting.vue",
+=======
+  "SelectedNode": "\\src\\components\\Taskaccounting.vue",
+>>>>>>> Stashed changes
   "PreviewInSolutionExplorer": false
 }
