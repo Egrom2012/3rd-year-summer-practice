@@ -1,12 +1,10 @@
 <template>
   <div>
     <form @submit.prevent="onsubmit">
-<<<<<<< Updated upstream
       <input type="text" class="textcg" v-model="title" />
-      <button type="submit" class="butcg">Создать новую задачу</button>
+      <button type="submit" class="butcg">Создать новый проект</button>
     </form>
     <div>
-      <pre>editedId:{{ editedId }}</pre>
       <ul>
         <li
           v-for="(i, f) of spisok"
@@ -15,9 +13,8 @@
         >
           <span>
             <input type="checkbox" v-on:change="i.completed = !i.completed" />
-            <strong> {{ f + 1 }} </strong>
             <input v-if="editedId === i.id" type="text" :value="i.title" />
-            <span v-else>{{ i.title }} </span>
+            <span v-else>{{f + 1}}  {{i.title}} </span>
           </span>
           <button class="ra" @click="editedId = i.id">Изменить</button>
           <button class="rm" v-on:click="$emit('remove-project', i.id)">
@@ -25,52 +22,15 @@
           </button>
         </li>
       </ul>
-=======
-        <input type="text" class="textcg" v-model="title" />
-        <button type="submit" class="butcg">Создать новый проект</button>
-    </form>
-    <div>
-        <ul>
-            <li v-for="(i,f) in spisok" v-bind:class="{done:i.completed}">
-
-                <span>
-                    <input type="checkbox"
-                           v-on:change="i.completed = !i.completed" />
-                    <input type="text" v-if="i.isEditing" @keyup.enter="$emit('edit-Project',i.title)" v-model=i.title>
-                    <span v-else> {{f+1}} {{i.title}}</span>
-                </span>
-                <button class="ra" v-on:click="$emit ('change-Editing',i.title)">Изменить</button>
-                <button class="rm" v-on:click="$emit ('remove-project',i.id)">&times;</button>
-
-            </li>
-        </ul>
->>>>>>> Stashed changes
-    </div>
   </div>
+ </div>
 </template>
 
 <script>
-<<<<<<< Updated upstream
-export default {
-  props: ["spisok"],
-  f: Number,
-  data: () => ({
-    title: "",
-    editedId: null,
-  }),
-=======
     export default
         {
             props: ['spisok'],
             f: Number,
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-
   methods: {
     onsubmit() {
       if (this.title.trim()) {
@@ -84,7 +44,7 @@ export default {
       }
     },
   },
-};
+}
 </script>
 
 <style scoped>
@@ -102,9 +62,6 @@ li {
   margin-bottom: 1rem;
 }
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
 .rm {
   background: red;
   color: #ffffff;
@@ -118,15 +75,9 @@ input {
 .done {
   text-decoration: line-through;
 }
-=======
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
     .done {
         text-decoration: line-through;
     }
->>>>>>> Stashed changes
 
 form {
   display: flex;
