@@ -13,10 +13,10 @@
         >
           <span>
             <input type="checkbox" v-on:change="i.completed = !i.completed" />
-            <input v-if="editedId === i.id" type="text" :value="i.title" />
+            <input type="text" v-if="i.isEditing" @keyup.enter="$emit('edit-Project', i.title)" v-model="i.title" />
             <span v-else>{{f + 1}}  {{i.title}} </span>
           </span>
-          <button class="ra" @click="editedId = i.id">Изменить</button>
+          <button class="ra" @click="$emit('change-Editing', i.title)">Изменить</button>
           <button class="rm" v-on:click="$emit('remove-project', i.id)">
             &times;
           </button>
