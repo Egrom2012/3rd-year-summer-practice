@@ -63,6 +63,9 @@ export default {
         {
             props: ['spisok'],
             f: Number,
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 
   methods: {
@@ -97,6 +100,7 @@ li {
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 .rm {
   background: red;
   color: #ffffff;
@@ -111,6 +115,8 @@ input {
   text-decoration: line-through;
 }
 =======
+=======
+>>>>>>> Stashed changes
     .done {
         text-decoration: line-through;
     }

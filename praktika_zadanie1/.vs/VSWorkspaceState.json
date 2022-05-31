@@ -6,7 +6,11 @@
     "\\src\\views"
   ],
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   "SelectedNode": "\\src\\components\\Projectaccounting.vue",
+=======
+  "SelectedNode": "\\src\\components\\Taskaccounting.vue",
+>>>>>>> Stashed changes
 =======
   "SelectedNode": "\\src\\components\\Taskaccounting.vue",
 >>>>>>> Stashed changes
