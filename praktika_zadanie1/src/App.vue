@@ -3,7 +3,7 @@
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
-        <h1> РЎРїРёСЃРѕРє РїСЂРѕРµРєС‚РѕРІ</h1>
+        <h1> Список проектов</h1>
         <ProjectList 
                      v-bind:spisok="spisok" 
                      @remove-project="removeproject"
