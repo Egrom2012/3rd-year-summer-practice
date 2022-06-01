@@ -1,10 +1,10 @@
 <template>
     <form @submit.prevent="onsubmit">
-        <input type="text" class="textcg" v-model="title" />
+        <input type="date" class="textcg1" v-model="date" />
+        <input type="number" class="textcg2" max="24" min="1" v-model="hours" v-bind:style="{'background-color': color}" @click="changecolor" @keyup.enter="changecolor"/>
+        <input type="text" class="textcg3" v-model="title" />
+        <input type="text" class="textcg4" v-model="task" />
         <button type="submit" class="butcg">Создать новую проводку</button>
-        <select>
-        <option v-for="g in spisok2" value="g.title">{{g.title}}</option>
-        </select>
     </form>
     <div>
         <ul>
@@ -30,14 +30,32 @@
             props:
             ['spisok3'],
             f: Number,
-
+            data() {
+                return {
+                    color:'white'
+                }
+                },
             methods:
             {
                 onsubmit() {
                     if (this.title.trim()) {
-                        const newproject = { title: this.title, id: Date.now(), completed: false, isEditing: false }
-                        this.$emit('add-project', newproject)
-                        this.title = ''
+                            const newproject = { date: this.date, hours: this.hours, title: this.title, task: this.task, id: Date.now(), completed: false, isEditing: false }
+                            this.$emit('add-project', newproject)
+                            this.date = ''
+                            this.hours = ''
+                            this.title = ''
+                            this.task = ''
+                    }
+                },
+                changecolor() {
+                    if (this.hours == 8) {
+                        this.color = 'lime'
+                    }
+                    if (this.hours > 8) {
+                        this.color ='red'
+                    }
+                    if (this.hours < 8) {
+                        this.color = 'yellow'
                     }
                 }
             }
@@ -75,8 +93,23 @@
         padding: 1rem;
     }
 
-    .textcg {
-        width: 500px;
+    .textcg1 {
+        width: 100px;
+        padding: 0.3rem
+    }
+    /*
+    .textcg2 {
+        background:white;
+        width: 50px;
+        padding: 0.3rem
+    }
+        */
+    .textcg3 {
+        width: 200px;
+        padding: 0.3rem
+    }
+    .textcg4 {
+        width: 100px;
         padding: 0.3rem
     }
 

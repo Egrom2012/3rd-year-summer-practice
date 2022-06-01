@@ -18,10 +18,10 @@ export default {
         data() {
             return {
                 spisok3: [
-                    { date: '22.05.2022', hours: 6, title: 'Microsoft office', task:'task', completed: false, isEditing: false },
-                    { date: '22.05.2022', hours: 5, title: 'Steam', task: 'task', completed: false, isEditing: false },
-                    { date: '22.05.2022', hours: 8, title: 'Minecraft', task: 'task', completed: false, isEditing: false },
-                    { date: '22.05.2022', hours: 2, title: 'Team fortress 3', task: 'task', completed: false, isEditing: false }
+                    { date: '2022-06-01', hours: 6, title: 'Microsoft office', task:'task',id:1, completed: false, isEditing: false },
+                    { date: '2022-06-01', hours: 5, title: 'Steam', task: 'task', id: 2, completed: false, isEditing: false },
+                    { date: '2022-06-01', hours: 8, title: 'Minecraft', task: 'task', id: 3, completed: false, isEditing: false },
+                    { date: '2022-06-01', hours: 2, title: 'Team fortress 3', task: 'task', id: 4, completed: false, isEditing: false }
                 ]
             }
         },
