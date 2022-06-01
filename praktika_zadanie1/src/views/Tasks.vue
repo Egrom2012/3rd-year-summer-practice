@@ -7,11 +7,13 @@
                      @edit-Project="editProject"
                      @change-Editing="changeEditing">
         </TaskList>
+        <WiringList v-bind:spisok2="spisok2"></WiringList>
     </div>
 </template>
 
 <script>
     import TaskList from '@/components/Taskaccounting'
+    import WiringList from '@/components/Wiringaccounting'
 export default {
         name: 'App',
         data() {
@@ -26,7 +28,7 @@ export default {
         },
         components:
         {
-      TaskList
+      TaskList, WiringList
         },
         methods:
         {

@@ -1,15 +1,26 @@
 <template>
     <form @submit.prevent="onsubmit">
         <input type="date" class="textcg1" v-model="date" />
-        <input type="number" class="textcg2" max="24" min="1" v-model="hours" v-bind:style="{'background-color': color}" @click="changecolor" @keyup.enter="changecolor"/>
+        <input type="number" class="textcg2" max="24" min="1" v-model="hours" v-bind:style="{'background-color': color}" @click="changecolor" @keyup.enter="changecolor" />
         <input type="text" class="textcg3" v-model="title" />
         <input type="text" class="textcg4" v-model="task" />
         <button type="submit" class="butcg">Создать новую проводку</button>
+        <select>
+            <option v-for="g in spisok2">{{g.title}}</option>
+        </select>
     </form>
     <div>
+        Фильтр проводок
+        <select v-model="filter" @change="onChangeSelect($event)">
+            <option value="All">За всё время</option>
+            <option value="Day">За день</option>
+            <option value="Month">За месяц</option>
+        </select>
+        <input :disabled="inputDisabled" type="date" v-model="Day" />
+
+
         <ul>
             <li v-for="(i,f) in spisok3" v-bind:class="{done:i.completed}">
-
                 <span>
                     <input type="checkbox"
                            v-on:change="i.completed = !i.completed" />
@@ -28,13 +39,28 @@
     export default
         {
             props:
-            ['spisok3'],
+                ['spisok3','spisok2'],
             f: Number,
             data() {
                 return {
-                    color:'white'
+                    color: 'yellow',
+                    hours: 1,
+                    inputDisabled: true
                 }
-                },
+            },
+           /* computed: {
+                filterwiring() {
+                    if (this.filter === 'All') {
+                        return this.spisok3
+                    }
+                    if (this.filter === 'Day') {
+                        return this.spisok3.filter(t=>t.completed)
+                    }
+                    if (this.filter === 'Month') {
+                        return this.spisok3
+                    }
+                }
+            },*/
             methods:
             {
                 onsubmit() {
@@ -57,6 +83,9 @@
                     if (this.hours < 8) {
                         this.color = 'yellow'
                     }
+                },
+                onChangeSelect(e) {
+                    this.inputDisabled = (e.target.value == 'All')
                 }
             }
         }
@@ -97,13 +126,6 @@
         width: 100px;
         padding: 0.3rem
     }
-    /*
-    .textcg2 {
-        background:white;
-        width: 50px;
-        padding: 0.3rem
-    }
-        */
     .textcg3 {
         width: 200px;
         padding: 0.3rem
