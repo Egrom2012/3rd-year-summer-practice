@@ -16,11 +16,10 @@
             <option value="Day">За день</option>
             <option value="Month">За месяц</option>
         </select>
-        <input :disabled="inputDisabled" type="date" v-model="Day" />
-
+        <input  type="date" v-model="Dayn" />
 
         <ul>
-            <li v-for="(i,f) in spisok3" v-bind:class="{done:i.completed}">
+            <li v-for="(i,f) in filteredList" v-bind:class="{done:i.completed}">
                 <span>
                     <input type="checkbox"
                            v-on:change="i.completed = !i.completed" />
@@ -45,22 +44,27 @@
                 return {
                     color: 'yellow',
                     hours: 1,
-                    inputDisabled: true
+                    filter: 'All',
+                    Dayn: ''
                 }
             },
-           /* computed: {
-                filterwiring() {
-                    if (this.filter === 'All') {
+            computed: {
+                filteredList: function () {
+                    if (this.filter == 'All') {
                         return this.spisok3
                     }
-                    if (this.filter === 'Day') {
-                        return this.spisok3.filter(t=>t.completed)
+                    if (this.filter == 'Day') {
+                        return this.spisok3.filter(t => {
+                            return this.Dayn.includes(t.date)
+                        })
                     }
-                    if (this.filter === 'Month') {
-                        return this.spisok3
+                    if (this.filter == 'Month') {
+                        return this.spisok3.filter(t => {
+                            return t.date.substr(5, 2).includes(this.Dayn.substr(5,2))
+                        })
                     }
                 }
-            },*/
+            },
             methods:
             {
                 onsubmit() {
@@ -83,9 +87,6 @@
                     if (this.hours < 8) {
                         this.color = 'yellow'
                     }
-                },
-                onChangeSelect(e) {
-                    this.inputDisabled = (e.target.value == 'All')
                 }
             }
         }

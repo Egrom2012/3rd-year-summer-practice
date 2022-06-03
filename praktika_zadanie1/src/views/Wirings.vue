@@ -7,7 +7,6 @@
                      @edit-Project="editProject"
                      @change-Editing="changeEditing">
         </WiringList>
-
     </div>
 </template>
 
@@ -21,7 +20,7 @@ export default {
                     { date: '2022-06-01', hours: 6, title: 'Microsoft office', task:'task',id:1, completed: false, isEditing: false },
                     { date: '2022-06-01', hours: 5, title: 'Steam', task: 'task', id: 2, completed: false, isEditing: false },
                     { date: '2022-06-01', hours: 8, title: 'Minecraft', task: 'task', id: 3, completed: false, isEditing: false },
-                    { date: '2022-06-01', hours: 2, title: 'Team fortress 3', task: 'task', id: 4, completed: false, isEditing: false }
+                    { date: '2022-05-12', hours: 2, title: 'Team fortress 3', task: 'task', id: 4, completed: false, isEditing: false }
                 ]
             }
         },
