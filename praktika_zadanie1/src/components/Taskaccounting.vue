@@ -1,21 +1,27 @@
 <template>
+    <h2> Список задач</h2>
     <form @submit.prevent="onsubmit">
         <input type="text" class="textcg" v-model="title" />
+        <select v-model="selectedspisok">
+            <option v-for="g in spisok">{{g.title}}</option>
+        </select>
         <button type="submit" class="butcg">Создать новую задачу</button>
     </form>
     <div>
         <ul>
             <li v-for="(i,f) in spisok2" v-bind:class="{done:i.completed}">
-
                 <span>
                     <input type="checkbox"
                            v-on:change="i.completed = !i.completed" />
-                    <input type="text" v-if="i.isEditing" @keyup.enter="$emit('edit-Project',i.title)" v-model=i.title>
-                    <span v-else> {{f+1}} {{i.title}}</span>
+                    <input type="text" v-if="i.isEditing" @keyup.enter="$emit('edit-Project',i.title,i.pro,2)" v-model=i.title>
+                    <span v-else> ID: {{f+1}}, Задача: {{i.title}},</span>
+                    <select v-if="i.isEditing" v-model="i.pro">
+                        <option v-for="g in spisok">{{g.title}}</option>
+                    </select>
+                    <span v-else> Проект: {{i.pro}}</span>
                 </span>
-                <button class="ra" v-on:click="$emit ('change-Editing',i.title)">Изменить</button>
-                <button class="rm" v-on:click="$emit ('remove-project',i.id)">&times;</button>
-
+                <button class="ra" v-on:click="$emit ('change-Editing',i.title, 2)">Изменить</button>
+                <button class="rm" v-on:click="$emit ('remove-project',i.id, 2)">&times;</button>
             </li>
         </ul>
     </div>
@@ -25,15 +31,20 @@
     export default
         {
             props:
-            ['spisok2'],
+            ['spisok','spisok2'],
             f: Number,
+
+            data() {
+                return {
+                }
+            },
 
             methods:
             {
                 onsubmit() {
                     if (this.title.trim()) {
-                        const newproject = { title: this.title, id: Date.now(), completed: false, isEditing: false }
-                        this.$emit('add-project', newproject)
+                        const newproject = { title: this.title, id: Date.now(), pro: this.selectedspisok, completed: false, isEditing: false}
+                        this.$emit('add-project', newproject,2)
                         this.title = ''
                     }
                 }

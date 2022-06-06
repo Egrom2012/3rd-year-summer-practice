@@ -1,29 +1,28 @@
 <template>
-  <div>
-    <form @submit.prevent="onsubmit">
-      <input type="text" class="textcg" v-model="title" />
-      <button type="submit" class="butcg">Создать новый проект</button>
-    </form>
     <div>
-      <ul>
-        <li
-          v-for="(i, f) of spisok"
-          v-bind:class="{ done: i.completed }"
-          :key="i.id"
-        >
-          <span>
-            <input type="checkbox" v-on:change="i.completed = !i.completed" />
-            <input type="text" v-if="i.isEditing" @keyup.enter="$emit('edit-Project', i.title)" v-model="i.title" />
-            <span v-else>{{f + 1}}  {{i.title}} </span>
-          </span>
-          <button class="ra" @click="$emit('change-Editing', i.title)">Изменить</button>
-          <button class="rm" v-on:click="$emit('remove-project', i.id)">
-            &times;
-          </button>
-        </li>
-      </ul>
-  </div>
- </div>
+        <h2> Список проектов</h2>
+        <form @submit.prevent="onsubmit">
+            <input type="text" class="textcg" v-model="title" />
+            <button type="submit" class="butcg">Создать новый проект</button>
+        </form>
+        <div>
+            <ul>
+                <li v-for="(i, f) of spisok"
+                    v-bind:class="{ done: i.completed }"
+                    :key="i.id">
+                    <span>
+                        <input type="checkbox" v-on:change="i.completed = !i.completed" />
+                        <input type="text" v-if="i.isEditing" @keyup.enter="$emit('edit-Project', i.title,1)" v-model="i.title" />
+                        <span v-else> ID:{{f + 1}}, Проект: {{i.title}} </span>
+                    </span>
+                    <button class="ra" @click="$emit('change-Editing', i.title, 1)">Изменить</button>
+                    <button class="rm" @click="$emit('remove-project', i.id, 1)">
+                        &times;
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -31,20 +30,24 @@
         {
             props: ['spisok'],
             f: Number,
-  methods: {
-    onsubmit() {
-      if (this.title.trim()) {
-        const newproject = {
-          title: this.title,
-          id: Date.now(),
-          completed: false,
-        };
-        this.$emit("add-project", newproject);
-        this.title = "";
-      }
-    },
-  },
-}
+            methods: {
+
+                onsubmit() {
+
+                    if (this.title.trim()) {
+                        const newproject = {
+                            title: this.title,
+                            id: Date.now(),
+                            completed: false,
+                        }
+                        this.$emit("add-project", newproject, 1)
+                        this.title = ""
+                    }
+                },
+
+            },
+
+        }
 </script>
 
 <style scoped>

@@ -1,13 +1,15 @@
 <template>
+    <h2> Список проводок</h2>
     <form @submit.prevent="onsubmit">
         <input type="date" class="textcg1" v-model="date" />
         <input type="number" class="textcg2" max="24" min="1" v-model="hours" v-bind:style="{'background-color': color}" @click="changecolor" @keyup.enter="changecolor" />
-        <input type="text" class="textcg3" v-model="title" />
-        <input type="text" class="textcg4" v-model="task" />
-        <button type="submit" class="butcg">Создать новую проводку</button>
-        <select>
-            <option v-for="g in spisok2">{{g.title}}</option>
+        <input type="text" class="textcg3" v-model="title" placeholder="Описание" />
+        <select v-model="selectedtask">
+            <option v-for="e in filteredLast">
+            {{e.title}}
+            </option>
         </select>
+        <button type="submit" class="butcg">Создать новую проводку</button>
     </form>
     <div>
         Фильтр проводок
@@ -16,18 +18,22 @@
             <option value="Day">За день</option>
             <option value="Month">За месяц</option>
         </select>
-        <input  type="date" v-model="Dayn" />
+        <input type="date" v-model="Dayn" />
 
         <ul>
             <li v-for="(i,f) in filteredList" v-bind:class="{done:i.completed}">
                 <span>
                     <input type="checkbox"
                            v-on:change="i.completed = !i.completed" />
-                    <input type="text" v-if="i.isEditing" @keyup.enter="$emit('edit-Project',i.title)" v-model=i.title>
-                    <span v-else>Дата:{{i.date}}, Количество часов:{{i.hours}}, Описание:{{i.title}}, Задача:{{i.task}}</span>
+                    <input type="text" v-if="i.isEditing" @keyup.enter="$emit('edit-Project',i.title,i.pro, 3)" v-model=i.title>
+                    <span v-else>Дата:{{i.date}}, Количество часов:{{i.hours}}, Описание:{{i.title}}</span>
+                    <select v-if="i.isEditing" v-model="i.pro">
+                        <option v-for="e in filteredLast">{{e.title}}</option>
+                    </select>
+                    <span v-else> Задача: {{i.pro}}</span>
                 </span>
-                <button class="ra" v-on:click="$emit ('change-Editing',i.title)">Изменить</button>
-                <button class="rm" v-on:click="$emit ('remove-project',i.id)">&times;</button>
+                <button class="ra" v-on:click="$emit ('change-Editing',i.title,3)">Изменить</button>
+                <button class="rm" v-on:click="$emit ('remove-project',i.id,3)">&times;</button>
 
             </li>
         </ul>
@@ -45,7 +51,9 @@
                     color: 'yellow',
                     hours: 1,
                     filter: 'All',
-                    Dayn: ''
+                    Dayn: '',
+                    selectedtask: '',
+                    type:'true'
                 }
             },
             computed: {
@@ -63,18 +71,24 @@
                             return t.date.substr(5, 2).includes(this.Dayn.substr(5,2))
                         })
                     }
+                },
+
+                filteredLast: function () {
+                    return this.spisok2.filter(function (p) {
+                        return !p.completed
+                    })
                 }
             },
             methods:
             {
                 onsubmit() {
                     if (this.title.trim()) {
-                            const newproject = { date: this.date, hours: this.hours, title: this.title, task: this.task, id: Date.now(), completed: false, isEditing: false }
-                            this.$emit('add-project', newproject)
+                        const newproject = { date: this.date, hours: this.hours, title: this.title, pro: this.selectedtask, id: Date.now(), completed: false, isEditing: false }
+                            this.$emit('add-project', newproject, 3)
                             this.date = ''
                             this.hours = ''
                             this.title = ''
-                            this.task = ''
+                            this.pro = ''
                     }
                 },
                 changecolor() {

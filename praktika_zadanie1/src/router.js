@@ -4,22 +4,22 @@ import Home from '@/views/Home.vue'
 export default createRouter({
     history: createWebHashHistory(),
     routes:
-       [
+        [
             {
                 path: '',
                component: Home
             },
             {
                 path: '/Projects',
-                component: () => import('./views/Projects.vue')
+                component: () => import('./components/Projectaccounting.vue')
             },
             {
                 path: '/Tasks',
-                component: () => import('./views/Tasks.vue')
+                component: () => import('./components/Taskaccounting.vue')
             },
             {
                 path: '/Wirings',
-                component: () => import('./views/Wirings.vue')
+                component: () => import('./components/Wiringaccounting.vue')
             }
        ]
 })
