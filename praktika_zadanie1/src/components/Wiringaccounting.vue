@@ -5,8 +5,9 @@
         <input type="number" class="textcg2" max="24" min="1" v-model="hours" v-bind:style="{'background-color': color}" @click="changecolor" @keyup.enter="changecolor" />
         <input type="text" class="textcg3" v-model="title" placeholder="Описание" />
         <select v-model="selectedtask">
+            <option disabled value="">Выберите один из вариантов</option>
             <option v-for="e in filteredLast">
-            {{e.title}}
+                {{e.title}}
             </option>
         </select>
         <button type="submit" class="butcg">Создать новую проводку</button>
@@ -28,12 +29,13 @@
                     <input type="text" v-if="i.isEditing" @keyup.enter="$emit('edit-Project',i.title,i.pro, 3)" v-model=i.title>
                     <span v-else>Дата:{{i.date}}, Количество часов:{{i.hours}}, Описание:{{i.title}}</span>
                     <select v-if="i.isEditing" v-model="i.pro">
-                        <option v-for="e in filteredLast">{{e.title}}</option>
+                        <!--<option v-for="e in spisok2" v-bind:disabled="option">{{e.title}}</option>-->
+                        <option v-for="e in spisok2">{{e.title}}</option>
                     </select>
                     <span v-else> Задача: {{i.pro}}</span>
                 </span>
-                <button class="ra" v-on:click="$emit ('change-Editing',i.title,3)">Изменить</button>
-                <button class="rm" v-on:click="$emit ('remove-project',i.id,3)">&times;</button>
+                <button class="ra" @click="$emit ('change-Editing',i.title,3)">Изменить</button>
+                <button class="rm" @click="$emit ('remove-project',i.id,3)">&times;</button>
 
             </li>
         </ul>
@@ -48,12 +50,12 @@
             f: Number,
             data() {
                 return {
-                    color: 'yellow',
+                    color: 'white',
                     hours: 1,
                     filter: 'All',
                     Dayn: '',
                     selectedtask: '',
-                    type:'true'
+                    option:'true'
                 }
             },
             computed: {
@@ -101,6 +103,12 @@
                     if (this.hours < 8) {
                         this.color = 'yellow'
                     }
+                },
+                Blocktitle(icompleted) {
+                    if (icompleted === true)
+                        this.option = true
+                    else
+                        this.option = false
                 }
             }
         }
