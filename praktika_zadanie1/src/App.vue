@@ -15,9 +15,6 @@
 </template>
 
 <script>
-    import ProjectList from '@/components/Projectaccounting'
-    import TaskList from '@/components/Taskaccounting'
-    import WiringList from '@/components/Wiringaccounting'
     export default {
         name: 'App',
         data() {
@@ -35,16 +32,12 @@
                     { title: 'Сделать', id: 4, pro: 'Team fortress 3', completed: true, isEditing: false}
                 ],
                 spisok3: [
-                    { date: '2022-06-01', hours: 6, title: 'Microsoft office', pro: 'Активировать офис', id: 1, completed: false, isEditing: false},
+                    { date: '2022-06-02', hours: 6, title: 'Microsoft office', pro: 'Активировать офис', id: 1, completed: false, isEditing: false},
                     { date: '2022-06-01', hours: 5, title: 'Steam', pro: 'Купить игру в steam', id: 2, completed: false, isEditing: false},
                     { date: '2022-06-01', hours: 8, title: 'Minecraft', pro: 'Поиграть в Minecraft', id: 3, completed: false, isEditing: false},
-                    { date: '2022-05-12', hours: 2, title: 'Team fortress 3', pro: 'Сделать', id: 4, completed: false, isEditing: false,}
+                    { date: '2022-05-12', hours: 8, title: 'Team fortress 3', pro: 'Сделать', id: 4, completed: false, isEditing: false,}
                 ]
             }
-        },
-        components:
-        {
-            ProjectList, TaskList, WiringList
         },
         methods:
         {

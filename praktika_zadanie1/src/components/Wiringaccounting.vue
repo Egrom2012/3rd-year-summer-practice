@@ -1,8 +1,8 @@
 <template>
     <h2> Список проводок</h2>
     <form @submit.prevent="onsubmit">
-        <input type="date" class="textcg1" v-model="date" />
-        <input type="number" class="textcg2" max="24" min="1" v-model="hours" v-bind:style="{'background-color': color}" @click="changecolor" @keyup.enter="changecolor" />
+        <input type="date" class="textcg1" v-model="date" @change="changecolor" />
+        <input type="number" class="textcg2" v-bind:max="24-checkhours" min="1" v-model="hours" @click="changecolor" @keyup.enter="changecolor" />
         <input type="text" class="textcg3" v-model="title" placeholder="Описание" />
         <select v-model="selectedtask">
             <option disabled value="">Выберите один из вариантов</option>
@@ -10,7 +10,7 @@
                 {{e.title}}
             </option>
         </select>
-        <button type="submit" class="butcg">Создать новую проводку</button>
+        <button type="submit" class="butcg" @click="changecolor" @change="changecolor">Создать новую проводку</button>
     </form>
     <div>
         Фильтр проводок
@@ -19,8 +19,8 @@
             <option value="Day">За день</option>
             <option value="Month">За месяц</option>
         </select>
-        <input type="date" v-model="Dayn" />
-
+        <input type="date" v-model="date" @click="changecolor" @change="changecolor"/>
+        <span>  <span id="kvadrat" v-bind:style="{'background':color}">    </span></span>
         <ul>
             <li v-for="(i,f) in filteredList" v-bind:class="{done:i.completed}">
                 <span>
@@ -29,8 +29,7 @@
                     <input type="text" v-if="i.isEditing" @keyup.enter="$emit('edit-Project',i.title,i.pro, 3)" v-model=i.title>
                     <span v-else>Дата:{{i.date}}, Количество часов:{{i.hours}}, Описание:{{i.title}}</span>
                     <select v-if="i.isEditing" v-model="i.pro">
-                        <!--<option v-for="e in spisok2" v-bind:disabled="option">{{e.title}}</option>-->
-                        <option v-for="e in spisok2">{{e.title}}</option>
+                        <option v-for="e in spisok2" :disabled="spisok2.filter(el=>el.completed).map((el) => el.id).includes(i.id) || e.completed">{{e.title}}</option>
                     </select>
                     <span v-else> Задача: {{i.pro}}</span>
                 </span>
@@ -54,8 +53,7 @@
                     hours: 1,
                     filter: 'All',
                     Dayn: '',
-                    selectedtask: '',
-                    option:'true'
+                    date: ''
                 }
             },
             computed: {
@@ -65,12 +63,12 @@
                     }
                     if (this.filter == 'Day') {
                         return this.spisok3.filter(t => {
-                            return this.Dayn.includes(t.date)
+                            return this.date.includes(t.date)
                         })
                     }
                     if (this.filter == 'Month') {
                         return this.spisok3.filter(t => {
-                            return t.date.substr(5, 2).includes(this.Dayn.substr(5,2))
+                            return t.date.substr(5, 2).includes(this.date.substr(5,2))
                         })
                     }
                 },
@@ -79,6 +77,11 @@
                     return this.spisok2.filter(function (p) {
                         return !p.completed
                     })
+                },
+                checkhours: function() {
+                   return this.spisok3
+                        .filter(t => this.date.includes(t.date))
+                        .reduce((total, i) => total + i.hours, 0)
                 }
             },
             methods:
@@ -87,29 +90,21 @@
                     if (this.title.trim()) {
                         const newproject = { date: this.date, hours: this.hours, title: this.title, pro: this.selectedtask, id: Date.now(), completed: false, isEditing: false }
                             this.$emit('add-project', newproject, 3)
-                            this.date = ''
                             this.hours = ''
                             this.title = ''
                             this.pro = ''
                     }
                 },
-                changecolor() {
-                    if (this.hours == 8) {
+                  changecolor() {
+                    if (this.checkhours == 8)
                         this.color = 'lime'
-                    }
-                    if (this.hours > 8) {
-                        this.color ='red'
-                    }
-                    if (this.hours < 8) {
-                        this.color = 'yellow'
-                    }
-                },
-                Blocktitle(icompleted) {
-                    if (icompleted === true)
-                        this.option = true
-                    else
-                        this.option = false
-                }
+
+                    if (this.checkhours > 8)
+                        this.color = 'red'
+
+                    if (this.checkhours < 8)
+                          this.color = 'yellow'
+                  }
             }
         }
 </script>
@@ -165,5 +160,10 @@
     .ra {
         font-weight: bold;
         width: 150px;
+    }
+
+    #kvadrat {
+        background: pink;
+        
     }
 </style>
