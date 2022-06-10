@@ -12,7 +12,7 @@
                     :key="i.id">
                     <span>
                         <input type="checkbox" v-on:change="i.completed = !i.completed" />
-                        <input type="text" v-if="i.isEditing" @keyup.enter="$emit('edit-Project', i.title,1)" v-model="i.title" />
+                        <input type="text" v-if="i.isEditing" @keyup.enter="$emit('edit-Project',i.title, Null, 1)" v-model="i.title" />
                         <span v-else> ID:{{f + 1}}, Проект: {{i.title}} </span>
                     </span>
                     <button class="ra" @click="$emit('change-Editing', i.title, 1)">Изменить</button>

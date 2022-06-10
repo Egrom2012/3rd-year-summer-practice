@@ -20,22 +20,22 @@
         data() {
             return {
                 spisok: [
-                    { title: 'Microsoft office', id: 1, completed: false, isEditing: false },
-                    { title: 'Steam', id: 2, completed: false, isEditing: false},
-                    { title: 'Minecraft', id: 3, completed: false, isEditing: false},
-                    { title: 'Team fortress 3', id: 4, completed: false, isEditing: false }
+                    { title: 'Team fortress 3', id: 1, completed: false, isEditing: false },
+                    { title: 'Half-life 3', id: 2, completed: false, isEditing: false},
+                    { title: 'Бально-рейтинговая система ЮЗГУ', id: 3, completed: false, isEditing: false},
+                    { title: 'ПО для РЖД', id: 4, completed: false, isEditing: false }
                 ],
                 spisok2: [
-                    { title: 'Активировать офис', id: 1, pro: 'Microsoft office', completed: false, isEditing: false},
-                    { title: 'Купить игру в steam', id: 2, pro: 'Steam', completed: false, isEditing: false},
-                    { title: 'Поиграть в Minecraft', id: 3, pro: 'Minecraft', completed: false, isEditing: false},
-                    { title: 'Сделать', id: 4, pro: 'Team fortress 3', completed: true, isEditing: false}
+                    { title: 'Написание движка', id: 1, pro: 'Team fortress 3', completed: false, isEditing: false},
+                    { title: 'Написание лора', id: 2, pro: 'Half-life 3', completed: false, isEditing: false},
+                    { title: 'Обновление системы', id: 3, pro: 'Бально-рейтинговая система ЮЗГУ', completed: false, isEditing: false},
+                    { title: 'Создание схемы', id: 4, pro: 'ПО для РЖД', completed: true, isEditing: false}
                 ],
                 spisok3: [
-                    { date: '2022-06-02', hours: 6, title: 'Microsoft office', pro: 'Активировать офис', id: 1, completed: false, isEditing: false},
-                    { date: '2022-06-01', hours: 5, title: 'Steam', pro: 'Купить игру в steam', id: 2, completed: false, isEditing: false},
-                    { date: '2022-06-01', hours: 8, title: 'Minecraft', pro: 'Поиграть в Minecraft', id: 3, completed: false, isEditing: false},
-                    { date: '2022-05-12', hours: 8, title: 'Team fortress 3', pro: 'Сделать', id: 4, completed: false, isEditing: false,}
+                    { date: '2022-06-02', hours: 6, title: 'Написал движок', pro: 'Написание движка', id: 1, completed: false, isEditing: false},
+                    { date: '2022-06-01', hours: 5, title: 'Написал лор', pro: 'Написание лора', id: 2, completed: false, isEditing: false},
+                    { date: '2022-06-01', hours: 8, title: 'Создано обновление', pro: 'Обновление системы', id: 3, completed: false, isEditing: false},
+                    { date: '2022-05-12', hours: 8, title: 'Создано основная схема', pro: 'Создание схемы', id: 4, completed: false, isEditing: false,}
                 ]
             }
         },
@@ -89,7 +89,6 @@
                         if (i.title === itext) {
                             i.isEditing = !i.isEditing;
                             i.title = itext;
-                            i.pro = ipro;
                         }
                         return i;
                     })
